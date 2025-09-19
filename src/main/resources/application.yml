@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: sprint3
+
+  datasource:
+    url: jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl
+    username: RM554513
+    password: 020905
+    driver-class-name: oracle.jdbc.OracleDriver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    schemas: RM554513
+    locations: classpath:db/migration
+
+jwt:
+  secret: ${JWT_SECRET:segredo_shhhhh}
+
+springdoc:
+  api-docs:
+    version: OPENAPI_3_0

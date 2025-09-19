@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Mottu - Excluir Filial</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+</head>
+<body class="container">
+
+<h1 class="h1" th:text="|Excluindo ${filial.nome}|"></h1>
+
+<form action="#" th:action="@{/web/filiais/deletar/{id}(id = ${filialId})}" method="post">
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+        <button class="btn btn-danger" type="submit">Confirmar deleção</button>
+        <a class="btn btn-secondary" href="/web/filiais">Cancelar</a>
+    </div>
+</form>
+</body>
+</html>

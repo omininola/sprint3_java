@@ -1,0 +1,10 @@
+name: sprint3_playground
+
+services:
+  server:
+    container_name: server
+    build:
+      context: .
+    restart: on-failure:5
+    ports:
+      - "8080:8080"
