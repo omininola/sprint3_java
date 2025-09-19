@@ -30,7 +30,7 @@ public class UsuarioWebController {
     @PostMapping("/register")
     public String create(@Valid UsuarioRequest request) {
         service.save(request);
-        return "redirect:/web/filiais";
+        return "redirect:/filial/list";
     }
 
     @GetMapping("/login")
@@ -43,7 +43,7 @@ public class UsuarioWebController {
     @PostMapping("/login")
     public String login(@Valid UsuarioLoginRequest request) {
         service.login(request);
-        return "redirect:/web/filiais";
+        return "redirect:/filial/list";
     }
 
     @GetMapping
@@ -62,7 +62,7 @@ public class UsuarioWebController {
     @PostMapping("/atualizar/{id}")
     public String update(@PathVariable Long id, @Valid UsuarioRequest request) {
         service.update(request, id);
-        return "redirect:/web/usuarios";
+        return "redirect:/usuario/list";
     }
 
     @GetMapping("/deletar/{id}")
@@ -74,6 +74,6 @@ public class UsuarioWebController {
     @PostMapping("/deletar/{id}")
     public String delete(@PathVariable Long id) {
         service.delete(id);
-        return "redirect:/web/usuarios";
+        return "redirect:/usuario/list";
     }
 }
