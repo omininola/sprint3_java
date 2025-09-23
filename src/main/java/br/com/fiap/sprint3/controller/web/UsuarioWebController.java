@@ -65,6 +65,13 @@ public class UsuarioWebController {
         return "redirect:/web/filiais";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpServletResponse response) {
+        Cookie cookie = new Cookie("JWT", null);
+        response.addCookie(cookie);
+        return "redirect:/web/usuarios/login";
+    }
+
     @GetMapping
     public String findAll(Model model) {
         model.addAttribute("usuarios", service.findAll());
