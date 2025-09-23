@@ -1,6 +1,8 @@
 package br.com.fiap.sprint3.controller.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +37,8 @@ public class MotoWebController {
     }
 
     @PostMapping("/new")
-    public String create(@Valid MotoRequest request) {
+    public String create(@Valid MotoRequest request, @AuthenticationPrincipal UserDetails user) {
+        System.out.println(user.getUsername());
         service.save(request);
         return "redirect:/web/motos";
     }
