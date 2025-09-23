@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.fiap.sprint3.dto.auth.AuthResponse;
 import br.com.fiap.sprint3.dto.usuario.UsuarioLoginRequest;
 import br.com.fiap.sprint3.dto.usuario.UsuarioRequest;
 import br.com.fiap.sprint3.entity.Usuario;
 import br.com.fiap.sprint3.service.UsuarioService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
 @Controller
@@ -28,9 +31,17 @@ public class UsuarioWebController {
     }
 
     @PostMapping("/register")
-    public String create(@Valid UsuarioRequest request) {
-        service.save(request);
-        return "redirect:/filial/list";
+    public String create(@Valid UsuarioRequest request, HttpServletResponse response) {
+        AuthResponse authResponse = service.save(request);
+
+        Cookie cookie = new Cookie("JWT", authResponse.getToken());
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(60 * 60); // 1 hour
+        response.addCookie(cookie);
+
+        return "redirect:/web/filiais";
     }
 
     @GetMapping("/login")
@@ -41,9 +52,17 @@ public class UsuarioWebController {
     }
 
     @PostMapping("/login")
-    public String login(@Valid UsuarioLoginRequest request) {
-        service.login(request);
-        return "redirect:/filial/list";
+    public String login(@Valid UsuarioLoginRequest request, HttpServletResponse response) {
+        AuthResponse authResponse = service.login(request);
+
+        Cookie cookie = new Cookie("JWT", authResponse.getToken());
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(60 * 60); // 1 hour
+        response.addCookie(cookie);
+
+        return "redirect:/web/filiais";
     }
 
     @GetMapping
@@ -62,11 +81,12 @@ public class UsuarioWebController {
     @PostMapping("/atualizar/{id}")
     public String update(@PathVariable Long id, @Valid UsuarioRequest request) {
         service.update(request, id);
-        return "redirect:/usuario/list";
+        return "redirect:/web/usuarios";
     }
 
     @GetMapping("/deletar/{id}")
     public String delete(Model model, @PathVariable Long id) {
+        model.addAttribute("usuarioEmail", service.findById(id).getEmail());
         model.addAttribute("usuarioId", id);
         return "usuario/delete";
     }
@@ -74,6 +94,6 @@ public class UsuarioWebController {
     @PostMapping("/deletar/{id}")
     public String delete(@PathVariable Long id) {
         service.delete(id);
-        return "redirect:/usuario/list";
+        return "redirect:/web/usuarios";
     }
 }

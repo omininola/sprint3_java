@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<!-- Meta Info -->
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <title th:text="${title}">Fragmentos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header th:fragment="navbar">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" th:href="@{/web/filiais}">Mottu</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link active" aria-current="page" th:href="@{/web/filiais}">Filiais</a>
+                        <a class="nav-link" th:href="@{/web/motos}">Motos</a>
+                        <a class="nav-link" th:href="@{/web/usuarios/login}">Login</a>
+                        <a class="nav-link" th:href="@{/web/usuarios/register}">Cadastro</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Footer -->
+    <footer th:fragment="footer">
+        <p>&copy; 2025 - Sprint 03 Java :D</p>
+    </footer>
+</body>
+</html>

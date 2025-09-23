@@ -53,6 +53,7 @@ public class FilialWebController {
 
     @GetMapping("/deletar/{id}")
     public String delete(Model model, @PathVariable Long id) {
+        model.addAttribute("filialNome", service.findById(id).getNome());
         model.addAttribute("filialId", id);
         return "filial/delete";
     }

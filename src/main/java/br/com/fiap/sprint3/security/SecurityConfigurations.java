@@ -29,18 +29,12 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/v3/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/web/usuarios/login").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/web/usuarios/register").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/web/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/*/usuarios/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/*/usuarios/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/*/filiais").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/*/motos").hasRole("ADMIN")
                         .anyRequest().authenticated())
-                .logout(logout -> logout
-                    .logoutUrl("/web/usuarios/logout")
-                    .logoutSuccessUrl("/web/usuario/login")
-                    .permitAll()
-                )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

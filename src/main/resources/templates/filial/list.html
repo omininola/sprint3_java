@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Mottu - Filiais</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-</head>
+<head th:replace="fragments/fragments :: head('Mottu - Filiais')"></head>
 <body class="container">
+
+<div th:replace="fragments/fragments :: navbar"></div>
 
 <h1 class="h1">Lista de Filiais</h1>
 <a class="btn btn-primary" href="/web/filiais/new">Cadastrar nova filial</a>
@@ -21,12 +19,17 @@
         <th scope="col" th:text="${filial.id}"></th>
         <td th:text="${filial.nome}"></td>
         <td th:text="${filial.endereco}"></td>
-        <td th:text="${filial.motos.size()}"></td>
+        <td style="display: flex;align-items: center;gap: 8px;">
+            <p th:text="${filial.motos.size()}"></p>
+            <a class="btn btn-primary" th:href="@{/web/motos/new/filial/{filialId}(filialId = ${filial.id})}">Adicionar Nova Moto</a>
+        </td>
         <td>
             <a class="btn btn-secondary" th:href="@{/web/filiais/atualizar/{id}(id = ${filial.id})}">Editar</a>
             <a class="btn btn-danger" th:href="@{/web/filiais/deletar/{id}(id = ${filial.id})}">Deletar</a>
         </td>
     </tr>
 </table>
+
+<div th:replace="fragments/fragments :: footer"></div>
 </body>
 </html>

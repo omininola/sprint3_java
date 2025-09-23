@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Mottu - Excluir Moto</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
-</head>
+<head th:replace="fragments/fragments :: head('Mottu - Excluir Moto')"></head>
 <body class="container">
 
-<h1 class="h1" th:text="|Excluindo ${moto.placa}|"></h1>
+<div th:replace="fragments/fragments :: navbar"></div>
+
+<h1 class="h1" th:text="|Excluindo a Moto: ${motoPlaca}|"></h1>
 
 <form action="#" th:action="@{/web/motos/deletar/{id}(id = ${motoId})}" method="post">
     <div style="display: flex; align-items: center; justify-content: space-between;">
@@ -15,5 +13,7 @@
         <a class="btn btn-secondary" href="/web/motos">Cancelar</a>
     </div>
 </form>
+
+<div th:replace="fragments/fragments :: footer"></div>
 </body>
 </html>

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.fiap.sprint3.dto.moto.MotoRequest;
-import br.com.fiap.sprint3.entity.Moto;
 import br.com.fiap.sprint3.service.MotoService;
 import jakarta.validation.Valid;
 
@@ -22,7 +21,16 @@ public class MotoWebController {
 
     @GetMapping("/new")
     public String create(Model model) {
-        model.addAttribute("moto", new Moto());
+        model.addAttribute("moto", new MotoRequest());
+        return "moto/new";
+    }
+
+    @GetMapping("/new/filial/{filialId}")
+    public String create(Model model, @PathVariable Long filialId) {
+        MotoRequest moto = new MotoRequest();
+        moto.setFilialId(filialId);
+        
+        model.addAttribute("moto", moto);
         return "moto/new";
     }
 
@@ -53,6 +61,7 @@ public class MotoWebController {
 
     @GetMapping("/deletar/{id}")
     public String delete(Model model, @PathVariable Long id) {
+        model.addAttribute("motoPlaca", service.findById(id).getPlaca());
         model.addAttribute("motoId", id);
         return "moto/delete";
     }
