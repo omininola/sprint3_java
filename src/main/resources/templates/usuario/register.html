@@ -17,10 +17,24 @@
         <label class="form-label">Senha:</label>
         <input class="form-control" type="password" th:field="*{senha}" />
     </div>
+
     <div class="mb-3">
-        <label class="form-label">Role:</label>
-        <input class="form-control" type="text" th:field="*{role}" />
+        <p>Selecione sua ROLE</p>
+
+        <div class="form-check dropdown-item">
+            <input class="form-check-input" type="radio" th:field="*{role}" name="radioOptions" id="option1" value="USER">
+            <label class="form-check-label" for="option1">
+            USER
+            </label>
+        </div>
+        <div class="form-check dropdown-item">
+            <input class="form-check-input" type="radio" th:field="*{role}" name="radioOptions" id="option2" value="ADMIN">
+            <label class="form-check-label" for="option2">
+            ADMIN
+            </label>
+        </div>
     </div>
+
     <div style="display: flex; align-items: center; justify-content: space-between;">
         <button class="btn btn-primary" type="submit">Cadastrar</button>
         <a class="btn btn-secondary" href="/web/usuarios">Cancelar</a>
