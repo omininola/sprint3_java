@@ -6,7 +6,7 @@
 <div th:replace="fragments/fragments :: navbar"></div>
 
 <h1 class="h1">Lista de Motos</h1>
-<a class="btn btn-primary" href="/web/motos/new">Cadastrar nova moto</a>
+<a sec:authorize="hasRole('ADMIN')" class="btn btn-primary" href="/web/motos/new">Cadastrar nova moto</a>
 
 <table class="table">
     <tr>
@@ -14,13 +14,14 @@
         <th scope="col">Placa</th>
         <th scope="col">Status</th>
         <th scope="col">Filial</th>
+        <th sec:authorize="hasRole('ADMIN')" scope="col">Ações</th>
     </tr>
     <tr th:each="moto : ${motos}">
         <th scope="col" th:text="${moto.id}"></th>
         <td th:text="${moto.placa}"></td>
         <td th:text="${moto.status}"></td>
         <td th:text="${moto.filialNome}"></td>
-        <td>
+        <td sec:authorize="hasRole('ADMIN')">
             <a class="btn btn-secondary" th:href="@{/web/motos/atualizar/{id}(id = ${moto.id})}">Editar</a>
             <a class="btn btn-danger" th:href="@{/web/motos/deletar/{id}(id = ${moto.id})}">Deletar</a>
         </td>

@@ -6,7 +6,7 @@
 <div th:replace="fragments/fragments :: navbar"></div>
 
 <h1 class="h1">Lista de Filiais</h1>
-<a class="btn btn-primary" href="/web/filiais/new">Cadastrar nova filial</a>
+<a sec:authorize="hasRole('ADMIN')" class="btn btn-primary" href="/web/filiais/new">Cadastrar nova filial</a>
 
 <table class="table">
     <tr>
@@ -14,6 +14,7 @@
         <th scope="col">Nome</th>
         <th scope="col">Endereço</th>
         <th scope="col">Motos</th>
+        <th sec:authorize="hasRole('ADMIN')" scope="col">Ações</th>
     </tr>
     <tr th:each="filial : ${filiais}">
         <th scope="col" th:text="${filial.id}"></th>
@@ -21,9 +22,9 @@
         <td th:text="${filial.endereco}"></td>
         <td style="display: flex;align-items: center;gap: 8px;">
             <p th:text="${filial.motos.size()}"></p>
-            <a class="btn btn-primary" th:href="@{/web/motos/new/filial/{filialId}(filialId = ${filial.id})}">Adicionar Nova Moto</a>
+            <a sec:authorize="hasRole('ADMIN')" class="btn btn-primary" th:href="@{/web/motos/new/filial/{filialId}(filialId = ${filial.id})}">Adicionar Nova Moto</a>
         </td>
-        <td>
+        <td sec:authorize="hasRole('ADMIN')">
             <a class="btn btn-secondary" th:href="@{/web/filiais/atualizar/{id}(id = ${filial.id})}">Editar</a>
             <a class="btn btn-danger" th:href="@{/web/filiais/deletar/{id}(id = ${filial.id})}">Deletar</a>
         </td>

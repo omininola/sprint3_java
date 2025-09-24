@@ -9,7 +9,7 @@
 
 <form action="#" th:action="@{/web/usuarios/deletar/{id}(id = ${usuarioId})}" method="post">
     <div style="display: flex; align-items: center; justify-content: space-between;">
-        <button class="btn btn-danger" type="submit">Confirmar deleção</button>
+        <button sec:authorize="hasRole('ADMIN')" class="btn btn-danger" type="submit">Confirmar deleção</button>
         <a class="btn btn-secondary" href="/web/usuarios">Cancelar</a>
     </div>
 </form>

@@ -4,10 +4,10 @@
 
 ```bash
 # Clone o projeto
-git clone https://github.com/omininola/sprint3_java_playground
+git clone https://github.com/omininola/sprint3_java
 
 # Vá até a pasta do projeto
-cd sprint3_java_playground
+cd sprint3_java
 
 # Rode o Docker Compose
 docker compose up -d --build
@@ -15,7 +15,7 @@ docker compose up -d --build
 
 ## Testes
 
-Entre na url: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+Entre na url: [http://localhost:8080/web/usuarios/register](http://localhost:8080/web/usuarios/register)
 
 1. Registre um novo usuário com a role de ADMIN
 
@@ -27,25 +27,5 @@ Entre na url: [http://localhost:8080/swagger-ui/index.html](http://localhost:808
 }
 ```
 
-2. Copie o token recebido
-3. Clique no botão escrito 'Authorize' na parte superior direita
-4. Cole o token e confirme
-5. Agora você tera acesso a todos os endpoints :D
-
-## Bonus
-
-Para conseguir acessar a API pelo front, vai ser preciso inserir o token no header da request
-
-Ex.
-```javascript
-const response = await fetch(`${API_URL_BASE}/filiais`, {
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  },
-});
-```
-
-Esse token deve ser usado em todas as requests que não sejam relacionadas a /usuarios/login ou /usuarios/register
-
-Vale lembrar também que o token expira, então caso você tenha o token em mãos e ele mesmo assim não funciona, tente logar novamente (Isso vai gerar um novo token)
+2. Seu acesso será liberado para a aplicação toda
+3. Se você for ADMIN, você pode criar novas Filiais e insirir Motos nelas

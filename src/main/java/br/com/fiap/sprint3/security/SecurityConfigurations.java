@@ -33,8 +33,10 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/web/usuarios/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/*/usuarios/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/*/usuarios/register").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/*/filiais").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/*/motos").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/web/filiais/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/web/motos/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/filiais").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/motos").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .logout(logout -> logout
                     .logoutUrl("/web/usuarios/logout")

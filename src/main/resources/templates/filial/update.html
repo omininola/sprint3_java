@@ -17,7 +17,7 @@
         <input class="form-control" type="text" th:field="*{endereco}" />
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between;">
-        <button class="btn btn-primary" type="submit">Salvar</button>
+        <button sec:authorize="hasRole('ADMIN')" class="btn btn-primary" type="submit">Salvar</button>
         <a class="btn btn-secondary" href="/web/filiais">Cancelar</a>
     </div>
 </form>

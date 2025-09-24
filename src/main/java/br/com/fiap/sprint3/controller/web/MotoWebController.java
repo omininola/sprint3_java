@@ -30,7 +30,7 @@ public class MotoWebController {
         MotoRequest moto = new MotoRequest();
         moto.setUsuarioId(usuario.getId());
         
-        model.addAttribute("moto", new MotoRequest());
+        model.addAttribute("moto", moto);
         return "moto/new";
     }
 
