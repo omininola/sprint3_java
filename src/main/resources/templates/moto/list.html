@@ -19,7 +19,7 @@
         <th scope="col" th:text="${moto.id}"></th>
         <td th:text="${moto.placa}"></td>
         <td th:text="${moto.status}"></td>
-        <td th:text="${moto.filial.nome}"></td>
+        <td th:text="${moto.filialNome}"></td>
         <td>
             <a class="btn btn-secondary" th:href="@{/web/motos/atualizar/{id}(id = ${moto.id})}">Editar</a>
             <a class="btn btn-danger" th:href="@{/web/motos/deletar/{id}(id = ${moto.id})}">Deletar</a>
