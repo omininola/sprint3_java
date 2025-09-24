@@ -48,7 +48,6 @@ public class UsuarioWebController {
     public String login(Model model) {
         model.addAttribute("usuario", new Usuario());
         return "usuario/login";
-
     }
 
     @PostMapping("/login")

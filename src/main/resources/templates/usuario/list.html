@@ -17,11 +17,11 @@
     </tr>
     <tr th:each="usuario : ${usuarios}">
         <th scope="col" th:text="${usuario.id}"></th>
-        <td th:text="${usuario.nome}"></td>
+        <td th:text="${usuario.email}"></td>
         <td th:text="${usuario.role}"></td>
         <td sec:authorize="hasRole('ADMIN')">
-            <a class="btn btn-secondary" th:href="@{/web/usuarios/atualizar/{id}(id = ${produto.id})}">Editar</a>
-            <a class="btn btn-danger" th:href="@{/web/usuarios/deletar/{id}(id = ${produto.id})}">Deletar</a>
+            <a class="btn btn-secondary" th:href="@{/web/usuarios/atualizar/{id}(id = ${usuario.id})}">Editar</a>
+            <a class="btn btn-danger" th:href="@{/web/usuarios/deletar/{id}(id = ${usuario.id})}">Deletar</a>
         </td>
     </tr>
 </table>
