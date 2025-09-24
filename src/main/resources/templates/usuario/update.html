@@ -10,11 +10,11 @@
 <form id="update" action="#" th:action="@{/web/usuarios/atualizar/{id}(id = ${usuarioId})}" th:object="${usuario}" method="post">
     <div class="mb-3">
         <label class="form-label">Email:</label>
-        <input class="form-control" type="text" th:field="*{nome}" />
+        <input class="form-control" type="email" th:field="*{nome}" />
     </div>
     <div class="mb-3">
         <label class="form-label">Senha:</label>
-        <input class="form-control" type="password" th:field="*{senha}" />
+        <input class="form-control" type="password" minlength="3" th:field="*{senha}" />
     </div>
 
     <div class="mb-3">
