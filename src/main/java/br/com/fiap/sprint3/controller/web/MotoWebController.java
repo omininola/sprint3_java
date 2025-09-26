@@ -1,8 +1,6 @@
 package br.com.fiap.sprint3.controller.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.fiap.sprint3.dto.moto.MotoRequest;
-import br.com.fiap.sprint3.entity.Usuario;
 import br.com.fiap.sprint3.service.MotoService;
 import jakarta.validation.Valid;
 
@@ -24,26 +21,13 @@ public class MotoWebController {
 
     @GetMapping("/new")
     public String create(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Usuario usuario = (Usuario) auth.getPrincipal();
-
-        MotoRequest moto = new MotoRequest();
-        moto.setUsuarioId(usuario.getId());
-        
-        model.addAttribute("moto", moto);
+        model.addAttribute("moto", service.fillUserIdByContext());
         return "moto/new";
     }
 
     @GetMapping("/new/filial/{filialId}")
     public String create(Model model, @PathVariable Long filialId) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Usuario usuario = (Usuario) auth.getPrincipal();
-
-        MotoRequest moto = new MotoRequest();
-        moto.setUsuarioId(usuario.getId());
-        moto.setFilialId(filialId);
-
-        model.addAttribute("moto", moto);
+        model.addAttribute("moto", service.fillUserIdByContext(filialId));
         return "moto/new";
     }
 

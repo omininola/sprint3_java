@@ -23,7 +23,7 @@
                         <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/web/motos}">Motos</a>
                         <a class="nav-link" sec:authorize="!isAuthenticated()" th:href="@{/web/usuarios/register}">Cadastro</a>
                         <a class="nav-link" sec:authorize="!isAuthenticated()" th:href="@{/web/usuarios/login}">Login</a>
-                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/web/usuarios/logout}">Logout</a>
+                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/web/usuarios/me}">Seu Perfil</a>
                     </div>
                 </div>
             </div>

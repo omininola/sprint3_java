@@ -10,7 +10,7 @@
 <form id="update" action="#" th:action="@{/web/usuarios/atualizar/{id}(id = ${usuarioId})}" th:object="${usuario}" method="post">
     <div class="mb-3">
         <label class="form-label">Email:</label>
-        <input class="form-control" type="email" th:field="*{nome}" />
+        <input class="form-control" type="email" th:field="*{email}" />
     </div>
     <div class="mb-3">
         <label class="form-label">Senha:</label>
@@ -36,7 +36,7 @@
     
     <div style="display: flex; align-items: center; justify-content: space-between;">
         <button sec:authorize="hasRole('ADMIN')" class="btn btn-primary" type="submit">Salvar</button>
-        <a class="btn btn-secondary" href="/web/usuarios">Cancelar</a>
+        <a class="btn btn-secondary" href="/web/usuarios/me">Cancelar</a>
     </div>
 </form>
 

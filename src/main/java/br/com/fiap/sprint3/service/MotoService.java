@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import br.com.fiap.sprint3.dto.moto.MotoRequest;
@@ -49,6 +51,27 @@ public class MotoService {
             throw new NotFoundException(NOT_FOUND_MESSAGE);
 
         return toResponse(moto.get());
+    }
+
+    public MotoRequest fillUserIdByContext(Long filialId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usuario = (Usuario) auth.getPrincipal();
+
+        MotoRequest moto = new MotoRequest();
+        moto.setUsuarioId(usuario.getId());
+        moto.setFilialId(filialId);
+
+        return moto;
+    }
+
+    public MotoRequest fillUserIdByContext() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usuario = (Usuario) auth.getPrincipal();
+
+        MotoRequest moto = new MotoRequest();
+        moto.setUsuarioId(usuario.getId());
+
+        return moto;
     }
 
     public MotoResponse update(Long id, MotoRequest request) {

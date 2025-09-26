@@ -31,7 +31,6 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/v3/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/web/usuarios/login").permitAll()
                         .requestMatchers(HttpMethod.GET, "/web/usuarios/register").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/web/usuarios/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/*/usuarios/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/*/usuarios/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/web/filiais/**").hasRole("ADMIN")
@@ -48,7 +47,7 @@ public class SecurityConfigurations {
                 )
                 .exceptionHandling(ex -> ex
                     .authenticationEntryPoint((req, res, e) -> res.sendRedirect("/web/usuarios/login"))
-                )   
+                )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

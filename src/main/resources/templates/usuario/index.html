@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head th:replace="fragments/fragments :: head('Mottu - Página do Usuário')"></head>
+<body>
+
+<h1 class="h1" th:text="|Olá, ${usuario.email}!|"></h1>
+
+<div style="display: flex; align-items: center; gap: 8px;">
+    <a class="btn btn-secondary" th:href="@{/web/usuarios/logout}">Logout</a>
+    <a class="btn btn-primary" th:href="@{/web/usuarios/atualizar/{id}(id = ${usuario.id})}">Atualizar usuário</a>
+    <a class="btn btn-danger" th:href="@{/web/usuarios/deletar/{id}(id = ${usuario.id})}">Excluir usuário</a>
+</div>
+
+</body>
+</html>

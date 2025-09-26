@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +21,7 @@ import br.com.fiap.sprint3.exception.BadRequestException;
 import br.com.fiap.sprint3.exception.NotFoundException;
 import br.com.fiap.sprint3.repository.UsuarioRepository;
 import br.com.fiap.sprint3.security.TokenService;
+import jakarta.servlet.http.Cookie;
 
 @Service
 public class UsuarioService {
@@ -77,8 +78,11 @@ public class UsuarioService {
         return toResponse(usuario.get());
     }
 
-    public AuthResponse findByEmail(UserDetails user) {
-        return authenticateAndBuildResponse(user.getUsername(), user.getPassword());
+    public UsuarioResponse findByContext() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario usuario = (Usuario) auth.getPrincipal();
+
+        return toResponse(usuario);
     }
 
     public UsuarioResponse update(UsuarioRequest request, Long id) {
@@ -108,6 +112,15 @@ public class UsuarioService {
         }
 
         repository.delete(usuario.get());
+    }
+
+    public Cookie createCookie(String token) {
+        Cookie cookie = new Cookie("JWT", token);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(60 * 60); // 1 hour
+        return cookie;
     }
 
     private Usuario toUsuario(UsuarioRequest request) {
@@ -143,5 +156,4 @@ public class UsuarioService {
 
         return authResponse;
     }
-
 }
