@@ -12,7 +12,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import br.com.fiap.sprint3.repository.UsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -46,15 +45,6 @@ public class SecurityFilter extends OncePerRequestFilter {
     private String recoverToken(HttpServletRequest request) {
         var authHeader = request.getHeader("Authorization");
         if (authHeader != null) return authHeader.replace("Bearer ", "");
-
-        if (request.getCookies() != null) {
-            for (Cookie c : request.getCookies()) {
-                if ("JWT".equals(c.getName())) {
-                    return c.getValue();
-                }
-            }
-        }
-
         return null;
     }
 
