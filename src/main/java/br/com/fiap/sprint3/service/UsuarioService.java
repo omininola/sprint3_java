@@ -21,7 +21,6 @@ import br.com.fiap.sprint3.exception.BadRequestException;
 import br.com.fiap.sprint3.exception.NotFoundException;
 import br.com.fiap.sprint3.repository.UsuarioRepository;
 import br.com.fiap.sprint3.security.TokenService;
-import jakarta.servlet.http.Cookie;
 
 @Service
 public class UsuarioService {
@@ -112,24 +111,6 @@ public class UsuarioService {
         }
 
         repository.delete(usuario.get());
-    }
-
-    public Cookie createCookie(String token) {
-        Cookie cookie = new Cookie("JWT", token);
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(60 * 60); // 1 hour
-        return cookie;
-    }
-
-    public Cookie clearCookie() {
-        Cookie cookie = new Cookie("JWT", null);
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(0);
-        return cookie;
     }
 
     private Usuario toUsuario(UsuarioRequest request) {
