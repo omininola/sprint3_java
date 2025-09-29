@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.fiap.sprint3.dto.auth.AuthResponse;
-import br.com.fiap.sprint3.dto.usuario.UsuarioLoginRequest;
 import br.com.fiap.sprint3.dto.usuario.UsuarioRequest;
 import br.com.fiap.sprint3.dto.usuario.UsuarioResponse;
 import br.com.fiap.sprint3.entity.Usuario;
 import br.com.fiap.sprint3.service.UsuarioService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 
@@ -32,30 +32,14 @@ public class UsuarioWebController {
 
     @PostMapping("/register")
     public String create(@Valid UsuarioRequest request, HttpServletResponse response) {
-        AuthResponse authResponse = service.save(request);
-        response.addCookie(service.createCookie(authResponse.getToken()));
-
-        return "redirect:/web/filiais";
+        service.save(request);
+        return "redirect:/web/usuarios/login";
     }
 
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("usuario", new Usuario());
         return "usuario/login";
-    }
-
-    @PostMapping("/login")
-    public String login(@Valid UsuarioLoginRequest request, HttpServletResponse response) {
-        AuthResponse authResponse = service.login(request);
-        response.addCookie(service.createCookie(authResponse.getToken()));
-
-        return "redirect:/web/filiais";
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpServletResponse response) {
-        response.addCookie(service.clearCookie());
-        return "redirect:/web/usuarios/login";
     }
 
     @GetMapping("/me")
@@ -90,10 +74,10 @@ public class UsuarioWebController {
     }
 
     @PostMapping("/deletar/{id}")
-    public String delete(@PathVariable Long id, HttpServletResponse response) {
-        response.addCookie(service.clearCookie());
+    public String delete(@PathVariable Long id, HttpServletRequest request) throws ServletException {
         service.delete(id);
-
-        return "redirect:/web/usuarios/me";
+        request.logout();
+        request.getSession().invalidate();
+        return "redirect:/web/usuarios/login";
     }
 }
