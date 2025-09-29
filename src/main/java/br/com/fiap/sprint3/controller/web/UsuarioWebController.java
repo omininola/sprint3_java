@@ -52,6 +52,12 @@ public class UsuarioWebController {
         return "redirect:/web/filiais";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpServletResponse response) {
+        response.addCookie(service.clearCookie());
+        return "redirect:/web/usuarios/login";
+    }
+
     @GetMapping("/me")
     public String findByContext(Model model) {
         model.addAttribute("usuario", service.findByContext());
@@ -84,8 +90,10 @@ public class UsuarioWebController {
     }
 
     @PostMapping("/deletar/{id}")
-    public String delete(@PathVariable Long id) {
+    public String delete(@PathVariable Long id, HttpServletResponse response) {
+        response.addCookie(service.clearCookie());
         service.delete(id);
+
         return "redirect:/web/usuarios/me";
     }
 }

@@ -44,8 +44,10 @@ public class SecurityConfigurations {
                         .anyRequest().authenticated())
                 .logout(logout -> logout
                     .logoutUrl("/web/usuarios/logout")
-                    .deleteCookies("JWT")
                     .logoutSuccessUrl("/web/usuarios/login")
+                    .deleteCookies("JWT")
+                    .invalidateHttpSession(true)
+                    .clearAuthentication(true)
                 )
                 .exceptionHandling(ex -> ex
                     .authenticationEntryPoint((req, res, e) -> res.sendRedirect("/web/usuarios/login"))

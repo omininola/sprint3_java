@@ -8,7 +8,7 @@
 <h1 class="h1">Novo Usuário</h1>
 <a class="btn btn-link" href="/web/usuarios/login">Já tem uma conta? Entre nela por aqui!</a>
 
-<form th:replace="fragments/usuario :: form(@{/web/usuarios/register}, 'Cadastrar')"></form>
+<form th:replace="fragments/usuario :: form(@{/web/usuarios/register}, 'Cadastrar', @{/web/usuarios/login})"></form>
 
 <div th:replace="fragments/fragments :: footer"></div>
 </body>

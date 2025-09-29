@@ -123,6 +123,15 @@ public class UsuarioService {
         return cookie;
     }
 
+    public Cookie clearCookie() {
+        Cookie cookie = new Cookie("JWT", null);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        return cookie;
+    }
+
     private Usuario toUsuario(UsuarioRequest request) {
         Usuario usuario = new Usuario();
         usuario.setSenha(request.getSenha());
