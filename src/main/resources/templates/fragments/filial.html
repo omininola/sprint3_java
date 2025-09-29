@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragmentos - Filial</title>
+</head>
+<body>
+    <!-- Formulário de Nova Filial / Update -->
+    <form th:fragment="form(action, submitText)" th:action="${action}" th:object="${filial}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <div class="mb-3">
+            <label class="form-label">Nome:</label>
+            <input class="form-control" type="text" th:field="*{nome}" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Endereco:</label>
+            <input class="form-control" type="text" th:field="*{endereco}" />
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <button sec:authorize="hasRole('ADMIN')" class="btn btn-primary" type="submit" th:text="${submitText}"></button>
+            <a class="btn btn-secondary" href="/web/motos">Cancelar</a>
+        </div>
+    </form>
+</body>
+</html>

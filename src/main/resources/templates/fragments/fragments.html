@@ -4,7 +4,8 @@
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
     <title th:text="${title}">Fragmentos</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Navbar -->
@@ -29,6 +30,14 @@
             </div>
         </nav>
     </header>
+
+    <!-- Object Deleting Confirm Form -->
+    <form th:fragment="delForm(action, cancel)" action="#" th:action="${action}" method="post">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <button sec:authorize="hasRole('ADMIN')" class="btn btn-danger" type="submit">Confirmar deleção</button>
+            <a class="btn btn-secondary" th:href="${cancel}">Cancelar</a>
+        </div>
+    </form>
 
     <!-- Footer -->
     <footer th:fragment="footer">

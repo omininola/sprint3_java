@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragmentos - Usuário</title>
+</head>
+<body>
+    <!-- Formulário de Cadastro / Update -->
+     <form th:fragment="form(action, submitText)" th:action="${action}" action="#" th:object="${usuario}" method="post">
+        <div class="mb-3">
+            <label class="form-label">Email:</label>
+            <input class="form-control" type="email" th:field="*{email}" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Senha:</label>
+            <input class="form-control" type="password" minlength="3" th:field="*{senha}" />
+        </div>
+
+        <div class="mb-3 dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Selecione sua ROLE
+            </a>
+
+            <div class="dropdown-menu">
+                <div class="dropdown-item">
+                    <input type="radio" th:field="*{role}" name="radioOptions" id="option1" value="USER">
+                    <label for="option1">
+                    USER
+                    </label>
+                </div>
+                <div class="dropdown-item">
+                    <input type="radio" th:field="*{role}" name="radioOptions" id="option2" value="ADMIN">
+                    <label for="option2">
+                    ADMIN
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <button class="btn btn-primary" type="submit" th:text="${submitText}"></button>
+            <a class="btn btn-secondary" href="/web/usuarios">Cancelar</a>
+        </div>
+    </form>
+</body>
+</html>

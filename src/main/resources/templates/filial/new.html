@@ -7,20 +7,7 @@
 
 <h1 class="h1">Nova Filial</h1>
 
-<form action="#" th:action="@{/web/filiais/new}" th:object="${filial}" method="post">
-    <div class="mb-3">
-        <label class="form-label">Nome:</label>
-        <input class="form-control" type="text" th:field="*{nome}" />
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Endereco:</label>
-        <input class="form-control" type="text" th:field="*{endereco}" />
-    </div>
-    <div style="display: flex; align-items: center; justify-content: space-between;">
-        <button sec:authorize="hasRole('ADMIN')" class="btn btn-primary" type="submit">Cadastrar</button>
-        <a class="btn btn-secondary" href="/web/filiais">Cancelar</a>
-    </div>
-</form>
+<form th:replace="fragments/filial :: form(@{/web/filiais/new}, 'Cadastrar')"></form>
 
 <div th:replace="fragments/fragments :: footer"></div>
 </body>

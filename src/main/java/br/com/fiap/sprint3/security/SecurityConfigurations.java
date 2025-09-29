@@ -24,8 +24,10 @@ public class SecurityConfigurations {
     @Bean
     public SecurityFilterChain SecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-                .csrf(csrf -> csrf.disable())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .csrf(csrf -> csrf
+                    .ignoringRequestMatchers("/api/**")
+                )
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.GET, "/swagger-ui/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/v3/**").permitAll()
@@ -33,9 +35,9 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/web/usuarios/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/*/usuarios/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/*/usuarios/register").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/web/filiais/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/web/motos/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/web/usuarios/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/web/filiais/new").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/web/motos/new").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/web/usuarios/new").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/filiais").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/motos").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/usuarios").hasRole("ADMIN")

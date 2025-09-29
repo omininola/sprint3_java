@@ -7,28 +7,7 @@
 
 <h1 class="h1">Nova Moto</h1>
 
-<form action="#" th:action="@{/web/motos/new}" th:object="${moto}" method="post">
-    <div class="mb-3">
-        <label class="form-label">Placa:</label>
-        <input class="form-control" type="text" th:field="*{placa}" />
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Status:</label>
-        <input class="form-control" type="text" th:field="*{status}" />
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Filial ID:</label>
-        <input class="form-control" type="text" th:field="*{filialId}" />
-    </div>
-    <div class="mb-3">
-        <label class="form-label">User ID:</label>
-        <input readonly class="form-control" type="text" th:field="*{usuarioId}" />
-    </div>
-    <div style="display: flex; align-items: center; justify-content: space-between;">
-        <button sec:authorize="hasRole('ADMIN')" class="btn btn-primary" type="submit">Cadastrar</button>
-        <a class="btn btn-secondary" href="/web/motos">Cancelar</a>
-    </div>
-</form>
+<form th:replace="fragments/moto :: form(@{/web/motos/new}, 'Cadastrar')"></form>
 
 <div th:replace="fragments/fragments :: footer"></div>
 </body>

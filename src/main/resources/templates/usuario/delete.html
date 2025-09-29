@@ -13,7 +13,9 @@
         <a class="btn btn-secondary" href="/web/usuarios/me">Cancelar</a>
     </div>
 </form>
-</body>
+
+<form th:replace="fragments/fragments :: delForm('@{/web/usuarios/deletar/{id}(id = ${usuarioId})}', '/web/usuarios/me')"></form>
 
 <div th:replace="fragments/fragments :: footer"></div>
+</body>
 </html>

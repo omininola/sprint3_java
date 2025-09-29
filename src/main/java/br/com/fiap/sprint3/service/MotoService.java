@@ -53,6 +53,19 @@ public class MotoService {
         return toResponse(moto.get());
     }
 
+    public Optional<MotoRequest> findRequestById(Long id) {
+        Optional<Moto> moto = repository.findById(id);
+        if (moto.isEmpty()) return null;
+
+        MotoRequest request = new MotoRequest();
+        request.setPlaca(moto.get().getPlaca());
+        request.setStatus(moto.get().getStatus());
+        request.setFilialId(moto.get().getFilial().getId());
+        request.setUsuarioId(moto.get().getUsuario().getId());
+
+        return Optional.ofNullable(request);
+    }
+
     public MotoRequest fillUserIdByContext(Long filialId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario usuario = (Usuario) auth.getPrincipal();

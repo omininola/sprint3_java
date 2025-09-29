@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragmentos - Moto</title>
+</head>
+<body>
+    <!-- Formulário de Nova Moto / Update -->
+    <form th:fragment="form(action, submitText)" th:action="${action}" th:object="${moto}" method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <div class="mb-3">
+            <label class="form-label">Placa:</label>
+            <input class="form-control" type="text" th:field="*{placa}" />
+            <p th:if="${#fields.hasErrors('placa')}" th:errors="*{placa}">Erro na placa</p>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Status:</label>
+            <input class="form-control" type="text" th:field="*{status}" />
+            <p th:if="${#fields.hasErrors('status')}" th:errors="*{status}">Erro no status</p>
+        </div>
+
+        <div class="mb-3 dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Filial
+            </a>
+            <p th:if="${#fields.hasErrors('filialId')}" th:errors="*{filialId}">Erro no ID da Filial</p>
+
+            <div class="dropdown-menu">
+                <div th:each="filial : ${filiais}" class="dropdown-item">
+                    <input type="radio" th:field="*{filialId}" name="radioOptions" th:id="${filial.id}" th:value="${filial.id}">
+                    <label th:for="${filial.id}" th:text="${filial.nome}"></label>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">User ID:</label>
+            <input readonly class="form-control" type="text" th:field="*{usuarioId}" />
+        </div>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <button sec:authorize="hasRole('ADMIN')" class="btn btn-primary" type="submit" th:text="${submitText}"></button>
+            <a class="btn btn-secondary" href="/web/motos">Cancelar</a>
+        </div>
+    </form>
+</body>
+</html>
