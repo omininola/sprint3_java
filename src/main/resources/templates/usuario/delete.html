@@ -7,14 +7,7 @@
 
 <h1 class="h1" th:text="|Excluindo o Usuário: ${usuarioEmail}|"></h1>
 
-<form action="#" th:action="@{/web/usuarios/deletar/{id}(id = ${usuarioId})}" method="post">
-    <div style="display: flex; align-items: center; justify-content: space-between;">
-        <button sec:authorize="hasRole('ADMIN')" class="btn btn-danger" type="submit">Confirmar deleção</button>
-        <a class="btn btn-secondary" href="/web/usuarios/me">Cancelar</a>
-    </div>
-</form>
-
-<form th:replace="fragments/fragments :: delForm('@{/web/usuarios/deletar/{id}(id = ${usuarioId})}', '/web/usuarios/me')"></form>
+<form th:replace="fragments/fragments :: delForm(@{/web/usuarios/deletar/{id}(id = ${usuarioId})}, @{/web/usuarios/me})"></form>
 
 <div th:replace="fragments/fragments :: footer"></div>
 </body>

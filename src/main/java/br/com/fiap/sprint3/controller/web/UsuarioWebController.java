@@ -3,7 +3,9 @@ package br.com.fiap.sprint3.controller.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +33,12 @@ public class UsuarioWebController {
     }
 
     @PostMapping("/register")
-    public String create(@Valid UsuarioRequest request, HttpServletResponse response) {
+    public String create(@Valid @ModelAttribute("usuario") UsuarioRequest request, HttpServletResponse response, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("usuario", request);
+            return "usuario/resgister";
+        }
+        
         service.save(request);
         return "redirect:/web/usuarios/login";
     }
@@ -61,7 +68,13 @@ public class UsuarioWebController {
     }
 
     @PostMapping("/atualizar/{id}")
-    public String update(@PathVariable Long id, @Valid UsuarioRequest request) {
+    public String update(@PathVariable Long id, @Valid @ModelAttribute("usuario") UsuarioRequest request, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("usuario", request);
+            model.addAttribute("usuarioId", id);
+            return "usuario/update";
+        }
+
         service.update(request, id);
         return "redirect:/web/usuarios/me";
     }

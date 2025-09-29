@@ -20,24 +20,15 @@
             <p th:if="${#fields.hasErrors('status')}" th:errors="*{status}">Erro no status</p>
         </div>
 
-        <div class="mb-3 dropdown">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Filial
-            </a>
-            <p th:if="${#fields.hasErrors('filialId')}" th:errors="*{filialId}">Erro no ID da Filial</p>
-
-            <div class="dropdown-menu">
-                <div th:each="filial : ${filiais}" class="dropdown-item">
-                    <input type="radio" th:field="*{filialId}" name="radioOptions" th:id="${filial.id}" th:value="${filial.id}">
-                    <label th:for="${filial.id}" th:text="${filial.nome}"></label>
-                </div>
-            </div>
-        </div>
+        <select class="mb-3 btn btn-secondary dropdown" th:field="*{filialId}">
+            <option th:each="filial : ${filiais}" class="dropdown-item" th:value="${filial.id}" th:text="${filial.nome}"></option>
+        </select>
 
         <div class="mb-3">
             <label class="form-label">User ID:</label>
             <input readonly class="form-control" type="text" th:field="*{usuarioId}" />
         </div>
+        
         <div style="display: flex; align-items: center; justify-content: space-between;">
             <button sec:authorize="hasRole('ADMIN')" class="btn btn-primary" type="submit" th:text="${submitText}"></button>
             <a class="btn btn-secondary" href="/web/motos">Cancelar</a>

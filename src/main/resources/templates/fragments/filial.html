@@ -12,10 +12,12 @@
         <div class="mb-3">
             <label class="form-label">Nome:</label>
             <input class="form-control" type="text" th:field="*{nome}" />
+            <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Erro no nome</p>
         </div>
         <div class="mb-3">
             <label class="form-label">Endereco:</label>
             <input class="form-control" type="text" th:field="*{endereco}" />
+            <p th:if="${#fields.hasErrors('endereco')}" th:errors="*{endereco}">Erro no endereço</p>
         </div>
         <div style="display: flex; align-items: center; justify-content: space-between;">
             <button sec:authorize="hasRole('ADMIN')" class="btn btn-primary" type="submit" th:text="${submitText}"></button>

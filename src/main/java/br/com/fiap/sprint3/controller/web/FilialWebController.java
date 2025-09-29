@@ -3,7 +3,9 @@ package br.com.fiap.sprint3.controller.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +29,12 @@ public class FilialWebController {
     }
 
     @PostMapping("/new")
-    public String create(@Valid FilialRequest request) {
+    public String create(@Valid @ModelAttribute("filial") FilialRequest request, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("filial", request);
+            return "filial/new";
+        }
+
         service.save(request);
         return "redirect:/web/filiais";
     }
@@ -46,7 +53,13 @@ public class FilialWebController {
     }
 
     @PostMapping("/atualizar/{id}")
-    public String update(@PathVariable Long id, @Valid FilialRequest request) {
+    public String update(@PathVariable Long id, @Valid @ModelAttribute("filial") FilialRequest request, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("filial", request);
+            model.addAttribute("filialId", id);
+            return "filial/update";
+        }
+
         service.update(id, request);
         return "redirect:/web/filiais";
     }

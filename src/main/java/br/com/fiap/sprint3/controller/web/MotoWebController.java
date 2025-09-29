@@ -75,6 +75,7 @@ public class MotoWebController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("filiais", filialService.findAll());
             model.addAttribute("moto", request);
+            model.addAttribute("motoId", id);
             return "moto/update";
         }
 
