@@ -22,6 +22,10 @@ jobs:
         java-version: '17'
     
     - name: Build with Maven
+      env:
+        SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
+        SPRING_DATASOURCE_USERNAME: ${{ secrets.SPRING_DATASOURCE_USERNAME }}
+        SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
       run: mvn clean install
 
     - name: Deploy to Azure Web App
