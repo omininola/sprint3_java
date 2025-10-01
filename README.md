@@ -9,7 +9,7 @@
 | João Pedro Amorim Brito | 559213 |
 
 ## Vídeo
-URL: [https://youtube.com](https://youtube.com)
+URL: [https://youtu.be/CUupOoHcGlA](https://youtu.be/CUupOoHcGlA)
 
 ## Instalação
 
