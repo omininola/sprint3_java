@@ -1,6 +1,9 @@
-CREATE TABLE sprint3_usuario (
-    id_usuario INT IDENTITY(1,1) PRIMARY KEY,
-    ds_email NVARCHAR(255) NOT NULL UNIQUE,
-    ds_senha NVARCHAR(255) NOT NULL,
-    ds_role NVARCHAR(20) NOT NULL
+create table sprint3_usuario (
+   id_usuario number(5)
+      generated always as identity,
+   ds_email   varchar2(255) not null,
+   ds_senha   varchar2(255) not null,
+   ds_role    varchar2(20) not null,
+   constraint pk_usuario primary key ( id_usuario ),
+   constraint uk_email unique ( ds_email )
 );
